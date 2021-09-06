@@ -2,13 +2,24 @@
 //
 #include <iostream>
 #include "getCpuLoad.hpp"
+#include "getMemoryLoad.hpp"
 
-int main(){
+void printCpuLoad() {
     while (true) {
-        std::cout << GetCPULoad();
-        std::cout << std::endl;
+        std::cout << GetCPULoad() << std::endl;
         Sleep(250);
     }
+}
+
+void printMemoryLoad() {
+    while (true) {
+        std::cout << "Total physical memory: " << getTotalPhysicalMemory() << std::endl << "Physical memory usage: " << getPhysicalMemoryLoad() << std::endl;
+        Sleep(1000);
+    }
+}
+
+int main(){
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
