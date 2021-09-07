@@ -1,2 +1,0 @@
-C:\Users\Radek\iCloudDrive\Documents\Uczelnia\Ippp\Semestry\6 SEMESTR\PS\projekt\ResourceMonitoring\WindowsProject1\Debug\WindowsProject1.exe
-C:\Users\Radek\Desktop\ResourceMonitoring\Aplikacja serwerowa\Debug\Serwer.exe
