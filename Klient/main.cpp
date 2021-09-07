@@ -3,23 +3,28 @@
 #include <iostream>
 #include "getCpuLoad.hpp"
 #include "getMemoryLoad.hpp"
+#include "getDiskFreeSpace.hpp"
 
 void printCpuLoad() {
-    while (true) {
-        std::cout << GetCPULoad() << std::endl;
-        Sleep(250);
-    }
+        std::cout << "CPU load: " << GetCPULoad() << std::endl;
 }
 
 void printMemoryLoad() {
-    while (true) {
         std::cout << "Total physical memory: " << getTotalPhysicalMemory() << std::endl << "Physical memory usage: " << getPhysicalMemoryLoad() << std::endl;
-        Sleep(1000);
-    }
 }
 
-int main(){
+void printDiskFreeSpace() {
+    std::cout << "Disk free space: " << getDiskFreeSpacePercentage() << "%" << std::endl;
+}
 
+
+int main(){
+    while (true) {
+        printCpuLoad();
+        printMemoryLoad();
+        printDiskFreeSpace();
+        Sleep(1000);
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
