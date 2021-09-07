@@ -24,12 +24,18 @@
     <ClCompile Include="getMemoryLoad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="getDiskFreeSpace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getCpuLoad.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="getMemoryLoad.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="getDiskFreeSpace.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
