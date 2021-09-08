@@ -17,7 +17,6 @@ void printDiskFreeSpace() {
     std::cout << "Disk free space: " << getDiskFreeSpacePercentage() << "%" << std::endl;
 }
 
-
 int main(){
     while (true) {
         printCpuLoad();
