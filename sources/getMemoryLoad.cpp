@@ -26,16 +26,16 @@ DWORDLONG getMemoryLoad(memoryType type) {
 }
 
 DWORDLONG getTotalVirtualMemory() {
-	return (getMemoryLoad(memoryType::totalVirtualMem)/1024)/1024;
+	return (getMemoryLoad(memoryType::totalVirtualMem) /1024) /1024;
 }
 DWORDLONG getTotalPhysicalMemory() {
-	return (getMemoryLoad(memoryType::totalPhysMem)/1024)/1024;
+	return (getMemoryLoad(memoryType::totalPhysMem) /1024) /1024;
 }
 DWORDLONG getVirtualMemoryLoad() {
-	return (getMemoryLoad(memoryType::virtualMemUsed)/1024) /1024;
+	return (getMemoryLoad(memoryType::virtualMemUsed) /1024) /1024;
 }
 DWORDLONG getPhysicalMemoryLoad() {
-	return (getMemoryLoad(memoryType::physMemUsed)/1024) /1024;
+	return (getMemoryLoad(memoryType::physMemUsed) /1024) /1024;
 }
 
 
