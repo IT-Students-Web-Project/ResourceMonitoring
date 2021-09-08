@@ -22,6 +22,7 @@ int main(){
         printCpuLoad();
         printMemoryLoad();
         printDiskFreeSpace();
+        std::cout << std::endl << std::endl << std::endl;
         Sleep(1000);
     }
 }
