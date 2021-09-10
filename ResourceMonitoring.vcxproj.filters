@@ -24,6 +24,9 @@
     <ClInclude Include="headers\getMemoryLoad.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="getRunningProcesses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\getCpuLoad.cpp">

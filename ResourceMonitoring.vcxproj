@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="getRunningProcesses.h" />
     <ClInclude Include="headers\getCpuLoad.hpp" />
     <ClInclude Include="headers\getDiskFreeSpace.hpp" />
     <ClInclude Include="headers\getMemoryLoad.hpp" />
