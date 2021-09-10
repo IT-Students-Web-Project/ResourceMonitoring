@@ -19,12 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="getRunningProcesses.h" />
+    <ClInclude Include="headers\RunningProcesses.h" />
     <ClInclude Include="headers\getCpuLoad.hpp" />
     <ClInclude Include="headers\getDiskFreeSpace.hpp" />
     <ClInclude Include="headers\getMemoryLoad.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\RunningProcesses.cpp" />
     <ClCompile Include="sources\getCpuLoad.cpp" />
     <ClCompile Include="sources\getDiskFreeSpace.cpp" />
     <ClCompile Include="sources\getMemoryLoad.cpp" />
