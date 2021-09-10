@@ -27,6 +27,12 @@
     <ClInclude Include="headers\RunningProcesses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\getHostName.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\getUserName.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\getCpuLoad.cpp">
@@ -42,6 +48,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\RunningProcesses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\getHostName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\getUserName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
