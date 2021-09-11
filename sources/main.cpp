@@ -7,6 +7,7 @@
 #include "getHostName.hpp"
 #include "getUserName.hpp"
 #include "RunningProcesses.h"
+#include "nlohmann/json.hpp"
 
 void printCpuLoad() {
         std::cout << "CPU load: " << GetCPULoad() << std::endl;
