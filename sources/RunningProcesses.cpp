@@ -1,8 +1,8 @@
 #include "RunningProcesses.h"
 
-inline RunningProcesses::RunningProcesses() { findRunningProcesses; }
+RunningProcesses::RunningProcesses() { findRunningProcesses(); }
 
-inline RunningProcesses::~RunningProcesses() {
+RunningProcesses::~RunningProcesses() {
 	for (int i = 0; i < runinigProcessesNumber; i++)
 	{
 		runningProcessesArray[i] = nullptr;
@@ -11,11 +11,11 @@ inline RunningProcesses::~RunningProcesses() {
 	delete[] runningProcessesArray;
 }
 
-inline int RunningProcesses::getRuninigProcessesNumber() { return runinigProcessesNumber; }
+int RunningProcesses::getRuninigProcessesNumber() { return runinigProcessesNumber; }
 
-inline std::string** RunningProcesses::getRunningProcessesArray() { return runningProcessesArray; }
+std::string** RunningProcesses::getRunningProcessesArray() { return runningProcessesArray; }
 
-inline void RunningProcesses::findRunningProcesses()
+void RunningProcesses::findRunningProcesses()
 {
 	DWORD aProcesses[1024], cbNeeded, cProcesses;
 	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded))
@@ -44,7 +44,7 @@ inline void RunningProcesses::findRunningProcesses()
 	}
 }
 
-inline std::string RunningProcesses::findProcessName(DWORD processID)
+std::string RunningProcesses::findProcessName(DWORD processID)
 {
 	TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE, processID);
