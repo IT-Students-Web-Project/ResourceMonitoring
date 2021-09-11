@@ -1,13 +1,9 @@
 // Klient.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#include <iomanip>
 #include <iostream>
-#include "getCpuLoad.hpp"
-#include "getMemoryLoad.hpp"
-#include "getDiskFreeSpace.hpp"
-#include "getHostName.hpp"
-#include "getUserName.hpp"
-#include "RunningProcesses.h"
-#include "nlohmann/json.hpp"
+#include <fstream>
+#include "ResourceSerializer.h"
 
 void printCpuLoad() {
         std::cout << "CPU load: " << GetCPULoad() << std::endl;
@@ -45,7 +41,20 @@ void printRunningProcesses() {
     std::cout << std::endl;
 }
 
+void printJosnToFile() {
+    ResourceSerializer serializer;
+    std::ofstream jsonFile("resources.json");
+    if (jsonFile.is_open())
+    {
+        jsonFile << std::setw(4) << serializer.getResourcesJson() << std::endl;
+        std::cout << "Succesfully printed to file!" << std::endl;
+        jsonFile.close();
+    }
+    else std::cout << "Unable to open file!" << std::endl;
+}
+
 int main(){
+    printJosnToFile();
     printUserName();
     printHostName();
     printRunningProcesses();
