@@ -11,11 +11,11 @@ class RunningProcesses
 private:
 	int runinigProcessesNumber = 0;
 	std::string** runningProcessesArray;
+	std::string findProcessName(DWORD processID);
 public:
 	RunningProcesses();
 	~RunningProcesses();
 	int getRuninigProcessesNumber();
 	std::string** getRunningProcessesArray();
 	void findRunningProcesses();
-	std::string findProcessName(DWORD processID);
 };

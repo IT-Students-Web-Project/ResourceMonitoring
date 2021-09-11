@@ -4,6 +4,9 @@
 #include "getCpuLoad.hpp"
 #include "getMemoryLoad.hpp"
 #include "getDiskFreeSpace.hpp"
+#include "getHostName.hpp"
+#include "getUserName.hpp"
+#include "RunningProcesses.h"
 
 void printCpuLoad() {
         std::cout << "CPU load: " << GetCPULoad() << std::endl;
@@ -17,7 +20,35 @@ void printDiskFreeSpace() {
     std::cout << "Disk free space: " << getDiskFreeSpacePercentage() << "%" << std::endl;
 }
 
+void printUserName() {
+    std::cout << "User Name: " << getUserName() << std::endl;
+}
+
+void printHostName() {
+    std::cout << "Host Name: " << getHostName() << std::endl;
+}
+
+void printRunningProcesses() {
+    RunningProcesses processes;
+    std::string** arr = processes.getRunningProcessesArray();
+    int n = processes.getRuninigProcessesNumber();
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << "id: " << arr[i][0] << " \tname: " << arr[i][1] << "\n";
+    }
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = nullptr;
+        delete[] arr[i];
+    }
+    std::cout << std::endl;
+}
+
 int main(){
+    printUserName();
+    printHostName();
+    printRunningProcesses();
+
     while (true) {
         printCpuLoad();
         printMemoryLoad();
