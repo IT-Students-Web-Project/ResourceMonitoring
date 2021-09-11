@@ -96,7 +96,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\jacek\Documents\ResourceMonitoring\sources;C:\Users\jacek\Documents\ResourceMonitoring\headers;$(IncludePath)</IncludePath>
+    <IncludePath>..\ResourceMonitoring\headers\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
