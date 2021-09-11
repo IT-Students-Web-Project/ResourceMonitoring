@@ -21,8 +21,9 @@
   <ItemGroup>
     <ClInclude Include="headers\getHostName.hpp" />
     <ClInclude Include="headers\getUserName.hpp" />
-    <ClInclude Include="headers\ResourceSerializer.h" />
-    <ClInclude Include="headers\RunningProcesses.h" />
+    <ClInclude Include="headers\printService.hpp" />
+    <ClInclude Include="headers\resourceSerializer.hpp" />
+    <ClInclude Include="headers\runningProcesses.hpp" />
     <ClInclude Include="headers\getCpuLoad.hpp" />
     <ClInclude Include="headers\getDiskFreeSpace.hpp" />
     <ClInclude Include="headers\getMemoryLoad.hpp" />
@@ -30,8 +31,9 @@
   <ItemGroup>
     <ClCompile Include="sources\getHostName.cpp" />
     <ClCompile Include="sources\getUserName.cpp" />
-    <ClCompile Include="sources\ResourceSerializer.cpp" />
-    <ClCompile Include="sources\RunningProcesses.cpp" />
+    <ClCompile Include="sources\printService.cpp" />
+    <ClCompile Include="sources\resourceSerializer.cpp" />
+    <ClCompile Include="sources\runningProcesses.cpp" />
     <ClCompile Include="sources\getCpuLoad.cpp" />
     <ClCompile Include="sources\getDiskFreeSpace.cpp" />
     <ClCompile Include="sources\getMemoryLoad.cpp" />

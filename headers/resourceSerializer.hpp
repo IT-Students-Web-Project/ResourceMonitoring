@@ -6,13 +6,16 @@
 #include "getDiskFreeSpace.hpp"
 #include "getHostName.hpp"
 #include "getUserName.hpp"
-#include "RunningProcesses.h"
+#include "RunningProcesses.hpp"
+
 using json = nlohmann::json;
 
 class ResourceSerializer {
+
 private:
 	json resources;
 	void updateResources();
+
 public:
 	ResourceSerializer();
 	json getResourcesJson();

@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     m_server = new QTcpServer();
 
-    if(m_server->listen(QHostAddress::Any, 80))
+    if(m_server->listen(QHostAddress::Any, 6881))
     {
        connect(this, &MainWindow::newMessage, this, &MainWindow::displayMessage);
        connect(m_server, &QTcpServer::newConnection, this, &MainWindow::newConnection);

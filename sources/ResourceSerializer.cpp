@@ -1,4 +1,4 @@
-#include "ResourceSerializer.h"
+#include "resourceSerializer.hpp"
 
 void ResourceSerializer::updateResources()
 {

@@ -1,4 +1,4 @@
-#include "RunningProcesses.h"
+#include "runningProcesses.hpp"
 
 RunningProcesses::RunningProcesses() { findRunningProcesses(); }
 

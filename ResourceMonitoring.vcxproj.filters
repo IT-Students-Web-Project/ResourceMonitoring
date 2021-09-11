@@ -24,7 +24,7 @@
     <ClInclude Include="headers\getMemoryLoad.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\RunningProcesses.h">
+    <ClInclude Include="headers\runningProcesses.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\getHostName.hpp">
@@ -33,7 +33,10 @@
     <ClInclude Include="headers\getUserName.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\ResourceSerializer.h">
+    <ClInclude Include="headers\resourceSerializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\printService.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +53,7 @@
     <ClCompile Include="sources\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\RunningProcesses.cpp">
+    <ClCompile Include="sources\runningProcesses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\getHostName.cpp">
@@ -59,7 +62,10 @@
     <ClCompile Include="sources\getUserName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\ResourceSerializer.cpp">
+    <ClCompile Include="sources\resourceSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\printService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
