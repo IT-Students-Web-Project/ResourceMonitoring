@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "resources.h"
+#include <fstream>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -17,6 +20,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         QMessageBox::critical(this,"QTCPServer",QString("Unable to start the server: %1.").arg(m_server->errorString()));
         exit(EXIT_FAILURE);
     }
+    Resources testResources;
+    qDebug() << "JSON\n";
+    std::ifstream jsonFile("resources.json");
+        if (jsonFile.is_open())
+        {
+            json tmp;
+            jsonFile >> tmp;
+            testResources.DeserializeJson(tmp);
+            jsonFile.close();
+            qDebug() << "User Name: " << QString::fromStdString(testResources.getUserName()) << "\n";
+            for (const auto& [key, value] : testResources.getProcessesMap()){
+                qDebug() << key << QString::fromStdString(value) << "\n";
+            }
+        }
+
 }
 
 MainWindow::~MainWindow()
