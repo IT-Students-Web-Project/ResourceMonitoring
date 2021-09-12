@@ -2,6 +2,7 @@
 #define RESOURCES_H
 #include <string>
 #include <map>
+#include <list>
 #include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
@@ -16,6 +17,10 @@ private:
     float diskFreeSpacePercentage;
     float cpuLoad;
     std::map<int, std::string> processesMap;
+    std::list<unsigned long long> memoryLoadList;
+    std::list<float> diskFreeSpacePercentageList;
+    std::list<float> cpuLoadList;
+    void updateLists();
 
 public:
     Resources();
@@ -27,7 +32,9 @@ public:
     float getDiskFreeSpacePercentage() {return diskFreeSpacePercentage;}
     float getCpuLoad() {return cpuLoad;}
     std::map<int, std::string> getProcessesMap() {return processesMap;}
-
+    std::list<unsigned long long> getMemoryLoadListReference() {return memoryLoadList;}
+    std::list<float> getDiskFreeSpacePercentageList() {return diskFreeSpacePercentageList;}
+    std::list<float> getCpuLoadList() {return cpuLoadList;}
 };
 
 #endif // RESOURCES_H
