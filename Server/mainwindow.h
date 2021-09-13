@@ -13,6 +13,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include "resources.h"
+#include <QAbstractItemModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,13 +38,6 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
 
     void displayMessage(const QString& str);
-    void sendMessage(QTcpSocket* socket);
-    void sendAttachment(QTcpSocket* socket, QString filePath);
-
-    void on_pushButton_sendMessage_clicked();
-    void on_pushButton_sendAttachment_clicked();
-
-    void refreshComboBox();
 
 private:
     Ui::MainWindow *ui;
