@@ -25,3 +25,11 @@ SelectedClient::~SelectedClient()
 {
     delete ui;
 }
+
+void SelectedClient::on_pushButtonProcesses_clicked()
+{
+    //<QTcpSocket*,Resources> resourcesSocketMap
+    RunningProcesses* p = new RunningProcesses(resources->getProcessesMap());
+    p->show();
+}
+
