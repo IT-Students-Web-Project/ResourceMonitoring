@@ -8,9 +8,13 @@
 #include <QMessageBox>
 #include <QMetaType>
 #include <QSet>
+#include <QMap>
 #include <QStandardPaths>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include "resources.h"
+#include <QAbstractItemModel>
+#include <QListWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,17 +39,14 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
 
     void displayMessage(const QString& str);
-    void sendMessage(QTcpSocket* socket);
-    void sendAttachment(QTcpSocket* socket, QString filePath);
 
-    void on_pushButton_sendMessage_clicked();
-    void on_pushButton_sendAttachment_clicked();
-
-    void refreshComboBox();
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
 
+    Resources testResources;
+    QMap<QTcpSocket*,Resources*> resourcesSocketMap;
     QTcpServer* m_server;
     QSet<QTcpSocket*> connection_set;
 };

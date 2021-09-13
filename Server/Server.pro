@@ -11,10 +11,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    resources.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    nlohmann/json.hpp \
+    resources.h
 
 FORMS += \
     mainwindow.ui
