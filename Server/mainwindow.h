@@ -14,6 +14,7 @@
 #include <QTcpSocket>
 #include "resources.h"
 #include <QAbstractItemModel>
+#include <QListWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,11 +40,13 @@ private slots:
 
     void displayMessage(const QString& str);
 
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
 
     Resources testResources;
-    QMap<QTcpSocket*,Resources> resourcesSocketMap;
+    QMap<QTcpSocket*,Resources*> resourcesSocketMap;
     QTcpServer* m_server;
     QSet<QTcpSocket*> connection_set;
 };

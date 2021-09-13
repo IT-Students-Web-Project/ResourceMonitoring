@@ -106,7 +106,7 @@ int main(){
             return 1;
         }
         if (iResult > 0)
-            printf("Bytes Sent: %ld\n", iResult);
+            printf("Resources data succesfully sent to server\n", iResult);
         else if (iResult == 0)
             printf("Connection closed\n");
         else

@@ -3,19 +3,20 @@
 void Resources::updateLists()
 {
     cpuLoadList.push_front(cpuLoad);
-    if(cpuLoadList.size() > 30)
         cpuLoadList.pop_back();
     diskFreeSpacePercentageList.push_front(diskFreeSpacePercentage);
-    if(diskFreeSpacePercentageList.size() > 30)
         diskFreeSpacePercentageList.pop_back();
     memoryLoadList.push_front(memoryLoad);
-    if(memoryLoadList.size() > 30)
         memoryLoadList.pop_back();
 }
 
 Resources::Resources()
 {
-
+    for (int i =0; i < 30; i++){
+        cpuLoadList.push_front(0.0f);
+        diskFreeSpacePercentageList.push_front(0.0f);
+        memoryLoadList.push_front(0.0f);
+    }
 }
 
 void Resources::DeserializeJson(json resourcesJson)

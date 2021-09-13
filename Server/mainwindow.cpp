@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "resources.h"
+#include "selectedclient.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -49,7 +50,7 @@ void MainWindow::appendToSocketList(QTcpSocket* socket)
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::discardSocket);
     connect(socket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayError);
     displayMessage(QString("INFO :: Client with sockd:%1 has just entered the room").arg(socket->socketDescriptor()));
-    resourcesSocketMap.insert(socket,Resources());
+    resourcesSocketMap.insert(socket,new Resources());
 
 }
 
@@ -65,17 +66,17 @@ void MainWindow::readSocket()
 
 
     QString dataQString = QString(buffer);
-    resourcesSocketMap[socket].DeserializeJson(json::parse(dataQString.toStdString()));
+    resourcesSocketMap[socket]->DeserializeJson(json::parse(dataQString.toStdString()));
     qDebug() << dataQString;
-    QString message = QString::fromStdString(resourcesSocketMap[socket].getHostName() + " " + resourcesSocketMap[socket].getUserName());
+    QString message = QString::fromStdString(resourcesSocketMap[socket]->getHostName()) + " has succesfully sent resources data";
     emit newMessage(message);
     bool notFound = true;
     for (int i = 0; i < ui->listWidget->count(); i++){
-        if(ui->listWidget->item(i)->text() == QString::fromStdString(resourcesSocketMap[socket].getHostName()))
+        if(ui->listWidget->item(i)->text() == QString::fromStdString(resourcesSocketMap[socket]->getHostName()))
             notFound = false;
     }
     if(notFound)
-        ui->listWidget->addItem(QString::fromStdString(resourcesSocketMap[socket].getHostName()));
+        ui->listWidget->addItem(QString::fromStdString(resourcesSocketMap[socket]->getHostName()));
     return;
 }
 
@@ -85,7 +86,7 @@ void MainWindow::discardSocket()
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QSet<QTcpSocket*>::iterator it = connection_set.find(socket);
     for (int i = 0; i < ui->listWidget->count(); i++){
-        if(ui->listWidget->item(i)->text() == (QString::fromStdString(resourcesSocketMap[socket].getHostName())))
+        if(ui->listWidget->item(i)->text() == (QString::fromStdString(resourcesSocketMap[socket]->getHostName())))
             ui->listWidget->takeItem(i);
     }
     resourcesSocketMap.remove(socket);
@@ -118,3 +119,15 @@ void MainWindow::displayMessage(const QString& str)
 {
     ui->textBrowser_receivedMessages->append(str);
 }
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    displayMessage(item->text() + " clicked");
+    //<QTcpSocket*,Resources> resourcesSocketMap
+    foreach (QTcpSocket* sock, resourcesSocketMap.keys())
+        if (QString::fromStdString(resourcesSocketMap.value(sock)->getHostName()) == item->text() ){
+            SelectedClient* c = new SelectedClient(resourcesSocketMap.value(sock));
+            c->show();
+        }
+}
+
