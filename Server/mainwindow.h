@@ -8,9 +8,11 @@
 #include <QMessageBox>
 #include <QMetaType>
 #include <QSet>
+#include <QMap>
 #include <QStandardPaths>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include "resources.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,6 +48,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    Resources testResources;
+    QMap<int,Resources> resourcesSocketMap;
     QTcpServer* m_server;
     QSet<QTcpSocket*> connection_set;
 };

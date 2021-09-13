@@ -34,10 +34,9 @@ int main(){
     struct addrinfo* result = NULL,
         * ptr = NULL,
         hints;
-    const char* sendbuf = "this is a test";
-    char recvbuf[DEFAULT_BUFLEN];
+    ResourceSerializer serializer;
+    const char* sendbuf;
     int iResult;
-    int recvbuflen = DEFAULT_BUFLEN;
 
 
     // Initialize Winsock
@@ -92,7 +91,9 @@ int main(){
 
     // Send until the peer closes the connection
     do {
-    iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
+        std::string serializedString = serializer.getResourcesJson().dump();
+        sendbuf = serializedString.c_str();
+    iResult = send(ConnectSocket, serializedString.c_str(), serializedString.length(), 0);
         if (iResult == SOCKET_ERROR) {
             printf("send failed with error: %d\n", WSAGetLastError());
             closesocket(ConnectSocket);
@@ -105,7 +106,7 @@ int main(){
             printf("Connection closed\n");
         else
             printf("send failed with error: %d\n", WSAGetLastError());
-        Sleep(1000);
+        Sleep(10000);
     } while (iResult > 0);
         
 

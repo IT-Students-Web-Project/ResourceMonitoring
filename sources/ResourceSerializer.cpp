@@ -3,7 +3,7 @@
 void ResourceSerializer::updateResources()
 {
 	resources["hostName"] = getHostName();
-	resources["userName"] = getHostName();
+	resources["userName"] = getUserName();
 	resources["cpuLoad"] = GetCPULoad();
 	resources["totalMemory"] = getTotalPhysicalMemory();
 	resources["memoryLoad"] = getPhysicalMemoryLoad();
@@ -14,6 +14,7 @@ void ResourceSerializer::updateResources()
 	int n = processes.getRuninigProcessesNumber();
 	for (int i = 0; i < n; i++)
 	{
+		remove(processesArr[i][1].begin(), processesArr[i][1].end(), ' ');
 		processesMap.insert({ atoi(processesArr[i][0].c_str()), processesArr[i][1] });
 	}
 	for (int i = 0; i < n; i++)
