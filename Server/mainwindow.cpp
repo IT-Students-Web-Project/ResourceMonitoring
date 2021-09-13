@@ -84,14 +84,14 @@ void MainWindow::discardSocket()
 
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QSet<QTcpSocket*>::iterator it = connection_set.find(socket);
+    for (int i = 0; i < ui->listWidget->count(); i++){
+        if(ui->listWidget->item(i)->text() == (QString::fromStdString(resourcesSocketMap[socket].getHostName())))
+            ui->listWidget->takeItem(i);
+    }
     resourcesSocketMap.remove(socket);
     if (it != connection_set.end()){
         displayMessage(QString("INFO :: A client has just left the room").arg(socket->socketDescriptor()));
         connection_set.remove(*it);
-    }
-    for (int i = 0; i < ui->listWidget->count(); i++){
-        if(ui->listWidget->item(i)->text() == QString::fromStdString(resourcesSocketMap[socket].getHostName()))
-            ui->listWidget->removeItemWidget(ui->listWidget->item(i));
     }
     socket->deleteLater();
 }
