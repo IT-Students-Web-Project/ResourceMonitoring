@@ -49,7 +49,7 @@ void MainWindow::appendToSocketList(QTcpSocket* socket)
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readSocket);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::discardSocket);
     connect(socket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayError);
-    displayMessage(QString("INFO :: Client with sockd:%1 has just entered the room").arg(socket->socketDescriptor()));
+    displayMessage(QString("INFO :: Client with sockd:%1 has just connected").arg(socket->socketDescriptor()));
     resourcesSocketMap.insert(socket,new Resources());
 
 }
