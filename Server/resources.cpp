@@ -27,6 +27,6 @@ void Resources::DeserializeJson(json resourcesJson)
     memoryLoad = resourcesJson["memoryLoad"];
     diskFreeSpacePercentage = resourcesJson["diskFreeSpacePercentage"];
     cpuLoad = resourcesJson["cpuLoad"];
-    processesMap= resourcesJson["processesMap"].get<std::map<int, std::string>>();
+    processesMap = resourcesJson["processesMap"].get<std::map<int, std::string>>();
     updateLists();
 }

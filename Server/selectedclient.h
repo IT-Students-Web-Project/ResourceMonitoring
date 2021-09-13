@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "resources.h"
+#include "runningprocesses.h"
 
 namespace Ui {
 class SelectedClient;
@@ -16,6 +17,9 @@ public:
     explicit SelectedClient(QWidget *parent = nullptr);
     SelectedClient(Resources* r);
     ~SelectedClient();
+
+private slots:
+    void on_pushButtonProcesses_clicked();
 
 private:
     Ui::SelectedClient *ui;
