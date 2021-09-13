@@ -12,15 +12,21 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    resources.cpp
+    resources.cpp \
+    runningprocesses.cpp \
+    selectedclient.cpp
 
 HEADERS += \
     mainwindow.h \
     nlohmann/json.hpp \
-    resources.h
+    resources.h \
+    runningprocesses.h \
+    selectedclient.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    runningprocesses.ui \
+    selectedclient.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
