@@ -13,7 +13,12 @@ SelectedClient::SelectedClient(Resources* r) : QDialog(nullptr),
 {
     resources = r;
     ui->setupUi(this);
-    ui->label->setText(QString::fromStdString(resources->getHostName()));
+    ui->labelHost->setText(QString::fromStdString(resources->getHostName()));
+    ui->labelUser->setText(QString::fromStdString(resources->getUserName()));
+    ui->labelCpuLoad->setText(QString::number(resources->getCpuLoad()) + "%");
+    ui->labelDisk->setText(QString::number(resources->getDiskFreeSpacePercentage())+ "%");
+    ui->labelMemory->setText(QString::number(resources->getTotalMemory()));
+    ui->labelUsedMemory->setText(QString::number(1.0*resources->getMemoryLoad()/resources->getTotalMemory()) + "%");
 }
 
 SelectedClient::~SelectedClient()
