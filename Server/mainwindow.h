@@ -49,7 +49,7 @@ private:
     Ui::MainWindow *ui;
 
     Resources testResources;
-    QMap<int,Resources> resourcesSocketMap;
+    QMap<QTcpSocket*,Resources> resourcesSocketMap;
     QTcpServer* m_server;
     QSet<QTcpSocket*> connection_set;
 };

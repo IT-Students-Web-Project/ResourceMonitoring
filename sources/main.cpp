@@ -16,10 +16,6 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-
-#define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "6881"
-
 int main(){
     //printRunningProcesses();
     //printJsonToFile();
@@ -28,6 +24,9 @@ int main(){
     //printCpuLoad();
     //printMemoryLoad();
     //printDiskFreeSpace();
+
+    std::string ipAddress;
+    std::string  port;
 
     WSADATA wsaData;
     SOCKET ConnectSocket = INVALID_SOCKET;
@@ -51,8 +50,14 @@ int main(){
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
+    std::cout << "Enter server IP address: ";
+    std::getline(std::cin, ipAddress);
+    std::cout << "Enter server port (default: 6881): ";
+    std::getline(std::cin, port);
+    std::cout << std::endl;
+
     // Resolve the server address and port
-    iResult = getaddrinfo("127.0.0.1", DEFAULT_PORT, &hints, &result);
+    iResult = getaddrinfo(ipAddress.c_str(), port.c_str(), &hints, &result);
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         WSACleanup();

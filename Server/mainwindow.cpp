@@ -50,6 +50,7 @@ void MainWindow::appendToSocketList(QTcpSocket* socket)
     connect(socket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayError);
     ui->comboBox_receiver->addItem(QString::number(socket->socketDescriptor()));
     displayMessage(QString("INFO :: Client with sockd:%1 has just entered the room").arg(socket->socketDescriptor()));
+    resourcesSocketMap.insert(socket,Resources());
 }
 
 void MainWindow::readSocket()
@@ -64,9 +65,9 @@ void MainWindow::readSocket()
 
 
     QString dataQString = QString(buffer);
-    testResources.DeserializeJson(json::parse(dataQString.toStdString()));
+    resourcesSocketMap[socket].DeserializeJson(json::parse(dataQString.toStdString()));
     qDebug() << dataQString;
-    QString message = QString::fromStdString(testResources.getHostName() + " " + testResources.getUserName());
+    QString message = QString::fromStdString(resourcesSocketMap[socket].getHostName() + " " + resourcesSocketMap[socket].getUserName());
     emit newMessage(message);
     return;
 }
@@ -75,6 +76,7 @@ void MainWindow::discardSocket()
 {
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QSet<QTcpSocket*>::iterator it = connection_set.find(socket);
+    resourcesSocketMap.remove(socket);
     if (it != connection_set.end()){
         displayMessage(QString("INFO :: A client has just left the room").arg(socket->socketDescriptor()));
         connection_set.remove(*it);
