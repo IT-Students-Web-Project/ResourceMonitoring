@@ -1,3 +1,4 @@
+#include "mainwindow.h"
 #include "selectedclient.h"
 #include "ui_selectedclient.h"
 
@@ -8,52 +9,84 @@ SelectedClient::SelectedClient(QWidget *parent) :
     ui->setupUi(this);
 }
 
-SelectedClient::SelectedClient(Resources* r) : QDialog(nullptr),
+SelectedClient::SelectedClient(MainWindow* mainWindow, Resources* r) : QDialog(nullptr),
     ui(new Ui::SelectedClient)
 {
     resources = r;
     ui->setupUi(this);
-    ui->labelHost->setText(QString::fromStdString(resources->getHostName()));
-    ui->labelUser->setText(QString::fromStdString(resources->getUserName()));
-    ui->labelCpuLoad->setText(QString::number(resources->getCpuLoad()) + "%");
-    ui->labelDisk->setText(QString::number(resources->getDiskFreeSpacePercentage())+ "%");
-    ui->labelMemory->setText(QString::number(resources->getTotalMemory()));
-    ui->labelUsedMemory->setText(QString::number(1.0*resources->getMemoryLoad()/resources->getTotalMemory()) + "%");
-    int iter = 1;
-    for (float cpuLoad : resources->getCpuLoadList()){
-        lineSeries[0]->append(iter, cpuLoad);
-        iter++;
-    }
-    iter = 1;
-    for (float diskSpace : resources->getDiskFreeSpacePercentageList()){
-        lineSeries[1]->append(iter, diskSpace);
-        iter++;
-    }
-    iter = 1;
-    for (float memoryLoad : resources->getMemoryLoadListReference()){
-        lineSeries[2]->append(iter, 1.0 * memoryLoad/resources->getTotalMemory());
-        iter++;
-    }
     charts[0]->setTitle("Cpu load");
     charts[1]->setTitle("Free disk space");
     charts[2]->setTitle("Free memory");
-    for (int i = 0; i < 3; i++) {
-        charts[i]->addSeries(lineSeries[i]);
-        charts[i]->legend()->hide();
-        charts[i]->createDefaultAxes();
-    }
-    ui->graphicsView_chart0->setChart(charts[0]);
-    ui->graphicsView_chart1->setChart(charts[1]);
-    ui->graphicsView_chart2->setChart(charts[2]);
-    ui->graphicsView_chart0->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView_chart1->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView_chart2->setRenderHint(QPainter::Antialiasing);
+
+    refreshView();
+    QObject::connect(mainWindow, &MainWindow::newMessage, this, &SelectedClient::refreshView);
 }
 
 SelectedClient::~SelectedClient()
 {
     delete ui;
 }
+
+void SelectedClient::refreshView() {
+
+    ui->labelHost->setText(QString::fromStdString(resources->getHostName()));
+    ui->labelUser->setText(QString::fromStdString(resources->getUserName()));
+    ui->labelCpuLoad->setText(QString::number(resources->getCpuLoad()) + "%");
+    ui->labelDisk->setText(QString::number(resources->getDiskFreeSpacePercentage())+ "%");
+    ui->labelMemory->setText(QString::number(resources->getTotalMemory()));
+    ui->labelUsedMemory->setText(QString::number(100.0*resources->getMemoryLoad()/resources->getTotalMemory()) + "%");
+
+    refreshFloatChart(ui->graphicsView_chart0, lineSeries[0], charts[0], resources->getCpuLoadList());
+    refreshFloatChart(ui->graphicsView_chart1, lineSeries[1], charts[1], resources->getDiskFreeSpacePercentageList());
+    refreshMemoryChart(ui->graphicsView_chart2, lineSeries[2], charts[2], resources->getMemoryLoadListReference());
+}
+
+void SelectedClient::refreshFloatChart(QChartView* chartView, QLineSeries* lineSeries, QChart* chart, std::list<float> dataList) {
+
+//    QValueAxis *percentageAxisY = new QValueAxis();
+//    percentageAxisY->setRange(0,100);
+//    chart->setAxisY(percentageAxisY);
+
+    lineSeries->clear();
+    int iter = 30;
+    for (float data : dataList){
+        lineSeries->append(iter, data);
+        iter--;
+    }
+
+    refreshChart(chartView, chart, lineSeries);
+}
+
+
+void SelectedClient::refreshMemoryChart(QChartView* chartView, QLineSeries* lineSeries, QChart* chart, std::list<unsigned long long> dataList) {
+
+//    QValueAxis *memoryAxisY = new QValueAxis();
+//    memoryAxisY->setRange(0, resources->getTotalMemory());
+
+//    chart->setAxisY(memoryAxisY);
+
+
+    lineSeries->clear();
+    int iter = 30;
+    for (unsigned long long data : dataList){
+        lineSeries->append(iter, 100.0 * data/resources->getTotalMemory());
+        iter--;
+    }
+
+    refreshChart(chartView, chart, lineSeries);
+}
+
+void SelectedClient::refreshChart(QChartView* chartView, QChart* chart, QLineSeries* lineSeries) {
+
+    chart->addSeries(lineSeries);
+    chart->legend()->hide();
+    chart->createDefaultAxes();
+
+    chartView->setChart(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+}
+
 
 void SelectedClient::on_pushButtonProcesses_clicked()
 {

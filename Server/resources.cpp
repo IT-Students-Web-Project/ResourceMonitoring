@@ -3,11 +3,11 @@
 void Resources::updateLists()
 {
     cpuLoadList.push_front(cpuLoad);
-        cpuLoadList.pop_back();
+    cpuLoadList.pop_back();
     diskFreeSpacePercentageList.push_front(diskFreeSpacePercentage);
-        diskFreeSpacePercentageList.pop_back();
+    diskFreeSpacePercentageList.pop_back();
     memoryLoadList.push_front(memoryLoad);
-        memoryLoadList.pop_back();
+    memoryLoadList.pop_back();
 }
 
 Resources::Resources()

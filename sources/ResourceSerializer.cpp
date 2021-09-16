@@ -4,7 +4,7 @@ void ResourceSerializer::updateResources()
 {
 	resources["hostName"] = getHostName();
 	resources["userName"] = getUserName();
-	resources["cpuLoad"] = GetCPULoad();
+	resources["cpuLoad"] = GetCPULoad() * 100;
 	resources["totalMemory"] = getTotalPhysicalMemory();
 	resources["memoryLoad"] = getPhysicalMemoryLoad();
 	resources["diskFreeSpacePercentage"] = getDiskFreeSpacePercentage();

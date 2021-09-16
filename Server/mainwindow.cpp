@@ -126,7 +126,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     //<QTcpSocket*,Resources> resourcesSocketMap
     foreach (QTcpSocket* sock, resourcesSocketMap.keys())
         if (QString::fromStdString(resourcesSocketMap.value(sock)->getHostName()) == item->text() ){
-            SelectedClient* c = new SelectedClient(resourcesSocketMap.value(sock));
+            SelectedClient* c = new SelectedClient(this, resourcesSocketMap.value(sock));
             c->show();
         }
 }

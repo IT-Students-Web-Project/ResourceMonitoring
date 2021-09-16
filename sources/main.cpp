@@ -27,6 +27,7 @@ int main(){
 
     std::string ipAddress;
     std::string  port;
+    const DWORD FREQUENCY = 1000;
 
     WSADATA wsaData;
     SOCKET ConnectSocket = INVALID_SOCKET;
@@ -111,7 +112,7 @@ int main(){
             printf("Connection closed\n");
         else
             printf("send failed with error: %d\n", WSAGetLastError());
-        Sleep(10000);
+        Sleep(FREQUENCY);
     } while (iResult > 0);
         
 
